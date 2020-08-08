@@ -36,11 +36,14 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "[@]",      spiral },
+	{ "[\\]",     dwindle },
 };
 
 /* key definitions */
@@ -75,7 +78,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,           killclient,     {0} },
 	{ MODKEY,                       XK_t,           setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,           setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,           setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_r,           setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ShiftMask,             XK_r,           setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,       setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,       togglefloating, {0} },
 	{ MODKEY,                       XK_0,           view,           {.ui = ~0 } },
@@ -96,7 +100,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,           6)
 	TAGKEYS(                        XK_8,           7)
 	TAGKEYS(                        XK_9,           8)
-	{ MODKEY|ShiftMask,             XK_q,           quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_e,           quit,           {0} },
 	{ MODKEY,                       XK_x,           spawn,          {.v = lockcmd } },
 };
 
